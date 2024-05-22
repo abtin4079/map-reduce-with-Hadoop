@@ -7,3 +7,24 @@ The input lines are expected to be sorted by the word. The reducer uses this sor
 aggregate document IDs by using a set data structure, transitioning between different words as it processes
 the input lines one-by-one.
 """
+import sys 
+
+current_word = None
+index = set()
+
+for line in sys.stdin:
+    # remove leading and trailing whitespace
+    line = line.strip()
+
+    # parse the input we got from mapper.py
+    word, count = line.split('\t')
+
+    if current_word and current_word != word:
+        print(f"{current_word} {{{', '.join(index)}}}")
+        index = set()
+
+    current_word = word
+    index.add(count)
+
+if current_word:
+    print(f"{current_word} {{{', '.join(index)}}}")

@@ -11,7 +11,7 @@ for line in sys.stdin:
     line = line.strip()
     # split the line into words
     index, words = line.split(",")
-    words = words.split()
+    words = words.lower().split()
     # increase counters
     for word in words:
         # write the results to STDOUT (standard output);
@@ -19,4 +19,4 @@ for line in sys.stdin:
         # Reduce step, i.e. the input for reducer.py
         #
         # tab-delimited; the trivial word count is 1
-        print (f'{word}\t{index}')
+        print (f'{word}\t{index}\t1')
